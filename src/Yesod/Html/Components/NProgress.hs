@@ -6,9 +6,8 @@ import Data.Aeson(ToJSON(toJSON), object, (.=))
 import Data.Default(Default(def))
 import Data.Text(Text)
 import Text.Julius(JavascriptUrl, ToJavascript(toJavascript))
-import Yesod.Core(MonadWidget, hamlet, julius, liftWidget, whamlet)
-import Yesod.Core.Types(tellWidget)
-import Yesod.Core.Widget(addScriptRemote, addStylesheetRemote, toWidget, toWidgetBody, toWidgetHead)
+import Yesod.Core(MonadWidget, hamlet, julius)
+import Yesod.Core.Widget(addStylesheetRemote, toWidgetBody, toWidgetHead)
 
 jsFile :: Text
 jsFile = "https://unpkg.com/nprogress@0.2.0/nprogress.js"
