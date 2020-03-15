@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE CPP #-}</span><span>
+</span><a name="line-2"></a><span>
+</span><a name="line-3"></a><span class="hs-comment">-- | Generic @Vector@ interface. Import as:</span><span>
+</span><a name="line-4"></a><span class="hs-comment">--</span><span>
+</span><a name="line-5"></a><span class="hs-comment">-- &gt; import qualified RIO.Vector as V</span><span>
+</span><a name="line-6"></a><span class="hs-comment">--</span><span>
+</span><a name="line-7"></a><span class="hs-comment">-- This module does not export any partial or unsafe functions.  For those, see</span><span>
+</span><a name="line-8"></a><span class="hs-comment">-- &quot;RIO.Vector.Partial&quot; and &quot;RIO.Vector.Unsafe&quot;</span><span>
+</span><a name="line-9"></a><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">RIO.Vector</span><span>
+</span><a name="line-10"></a><span>  </span><span class="hs-special">(</span><span>
+</span><a name="line-11"></a><span>  </span><span class="hs-comment">-- * Immutable vectors</span><span>
+</span><a name="line-12"></a><span>    </span><span class="hs-identifier hs-type">Data.Vector.Generic.Vector</span><span>
+</span><a name="line-13"></a><span>
+</span><a name="line-14"></a><span>  </span><span class="hs-comment">-- * Accessors</span><span>
+</span><a name="line-15"></a><span>  </span><span class="hs-comment">-- ** Length information</span><span>
+</span><a name="line-16"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.length</span><span>
+</span><a name="line-17"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.null</span><span>
+</span><a name="line-18"></a><span>
+</span><a name="line-19"></a><span>  </span><span class="hs-comment">-- ** Indexing</span><span>
+</span><a name="line-20"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="hs-operator hs-var">Data.Vector.Generic.!?</span><span class="hs-special">)</span><span>
+</span><a name="line-21"></a><span>
+</span><a name="line-22"></a><span>  </span><span class="hs-comment">-- ** Extracting subvectors</span><span>
+</span><a name="line-23"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.slice</span><span>
+</span><a name="line-24"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.take</span><span>
+</span><a name="line-25"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.drop</span><span>
+</span><a name="line-26"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.splitAt</span><span>
+</span><a name="line-27"></a><span>
+</span><a name="line-28"></a><span>  </span><span class="hs-comment">-- * Construction</span><span>
+</span><a name="line-29"></a><span>  </span><span class="hs-comment">-- ** Initialisation</span><span>
+</span><a name="line-30"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.empty</span><span>
+</span><a name="line-31"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.singleton</span><span>
+</span><a name="line-32"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.replicate</span><span>
+</span><a name="line-33"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.generate</span><span>
+</span><a name="line-34"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.iterateN</span><span>
+</span><a name="line-35"></a><span>
+</span><a name="line-36"></a><span>  </span><span class="hs-comment">-- ** Monadic initialisation</span><span>
+</span><a name="line-37"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.replicateM</span><span>
+</span><a name="line-38"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.generateM</span><span>
+</span><a name="line-39"></a><span class="hs-cpp">#if MIN_VERSION_vector(0,12,0)
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.iterateNM</span><span>
+</span><a name="line-41"></a><span class="hs-cpp">#endif
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.create</span><span>
+</span><a name="line-43"></a><span class="hs-cpp">#if MIN_VERSION_vector(0,12,0)
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.createT</span><span>
+</span><a name="line-45"></a><span class="hs-cpp">#endif
+</span><span>
+</span><a name="line-47"></a><span>  </span><span class="hs-comment">-- ** Unfolding</span><span>
+</span><a name="line-48"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.unfoldr</span><span>
+</span><a name="line-49"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.unfoldrN</span><span>
+</span><a name="line-50"></a><span class="hs-cpp">#if MIN_VERSION_vector(0,12,0)
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.unfoldrM</span><span>
+</span><a name="line-52"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.unfoldrNM</span><span>
+</span><a name="line-53"></a><span class="hs-cpp">#endif
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.constructN</span><span>
+</span><a name="line-55"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.constructrN</span><span>
+</span><a name="line-56"></a><span>
+</span><a name="line-57"></a><span>  </span><span class="hs-comment">-- ** Enumeration</span><span>
+</span><a name="line-58"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.enumFromN</span><span>
+</span><a name="line-59"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.enumFromStepN</span><span>
+</span><a name="line-60"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.enumFromTo</span><span>
+</span><a name="line-61"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.enumFromThenTo</span><span>
+</span><a name="line-62"></a><span>
+</span><a name="line-63"></a><span>  </span><span class="hs-comment">-- ** Concatenation</span><span>
+</span><a name="line-64"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.cons</span><span>
+</span><a name="line-65"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.snoc</span><span>
+</span><a name="line-66"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="hs-operator hs-var">Data.Vector.Generic.++</span><span class="hs-special">)</span><span>
+</span><a name="line-67"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.concat</span><span>
+</span><a name="line-68"></a><span class="hs-cpp">#if MIN_VERSION_vector(0,12,0)
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.concatNE</span><span>
+</span><a name="line-70"></a><span class="hs-cpp">#endif
+</span><span>
+</span><a name="line-72"></a><span>  </span><span class="hs-comment">-- ** Restricting memory usage</span><span>
+</span><a name="line-73"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.force</span><span>
+</span><a name="line-74"></a><span>
+</span><a name="line-75"></a><span>  </span><span class="hs-comment">-- * Modifying vectors</span><span>
+</span><a name="line-76"></a><span>  </span><span class="hs-comment">-- ** Permutations</span><span>
+</span><a name="line-77"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.reverse</span><span>
+</span><a name="line-78"></a><span>
+</span><a name="line-79"></a><span>  </span><span class="hs-comment">-- ** Safe destructive update</span><span>
+</span><a name="line-80"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.modify</span><span>
+</span><a name="line-81"></a><span>
+</span><a name="line-82"></a><span>  </span><span class="hs-comment">-- * Elementwise operations</span><span>
+</span><a name="line-83"></a><span>  </span><span class="hs-comment">-- ** Indexing</span><span>
+</span><a name="line-84"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.indexed</span><span>
+</span><a name="line-85"></a><span>
+</span><a name="line-86"></a><span>  </span><span class="hs-comment">-- ** Mapping</span><span>
+</span><a name="line-87"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.map</span><span>
+</span><a name="line-88"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.imap</span><span>
+</span><a name="line-89"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.concatMap</span><span>
+</span><a name="line-90"></a><span>
+</span><a name="line-91"></a><span>  </span><span class="hs-comment">-- ** Monadic mapping</span><span>
+</span><a name="line-92"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.mapM</span><span>
+</span><a name="line-93"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.imapM</span><span>
+</span><a name="line-94"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.mapM_</span><span>
+</span><a name="line-95"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.imapM_</span><span>
+</span><a name="line-96"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.forM</span><span>
+</span><a name="line-97"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.forM_</span><span>
+</span><a name="line-98"></a><span>
+</span><a name="line-99"></a><span>  </span><span class="hs-comment">-- ** Zipping</span><span>
+</span><a name="line-100"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.zipWith</span><span>
+</span><a name="line-101"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.zipWith3</span><span>
+</span><a name="line-102"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.zipWith4</span><span>
+</span><a name="line-103"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.zipWith5</span><span>
+</span><a name="line-104"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.zipWith6</span><span>
+</span><a name="line-105"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.izipWith</span><span>
+</span><a name="line-106"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.izipWith3</span><span>
+</span><a name="line-107"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.izipWith4</span><span>
+</span><a name="line-108"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.izipWith5</span><span>
+</span><a name="line-109"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.izipWith6</span><span>
+</span><a name="line-110"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.zip</span><span>
+</span><a name="line-111"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.zip3</span><span>
+</span><a name="line-112"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.zip4</span><span>
+</span><a name="line-113"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.zip5</span><span>
+</span><a name="line-114"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.zip6</span><span>
+</span><a name="line-115"></a><span>
+</span><a name="line-116"></a><span>  </span><span class="hs-comment">-- ** Monadic zipping</span><span>
+</span><a name="line-117"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.zipWithM</span><span>
+</span><a name="line-118"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.izipWithM</span><span>
+</span><a name="line-119"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.zipWithM_</span><span>
+</span><a name="line-120"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.izipWithM_</span><span>
+</span><a name="line-121"></a><span>
+</span><a name="line-122"></a><span>  </span><span class="hs-comment">-- ** Unzipping</span><span>
+</span><a name="line-123"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.unzip</span><span>
+</span><a name="line-124"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.unzip3</span><span>
+</span><a name="line-125"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.unzip4</span><span>
+</span><a name="line-126"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.unzip5</span><span>
+</span><a name="line-127"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.unzip6</span><span>
+</span><a name="line-128"></a><span>
+</span><a name="line-129"></a><span>  </span><span class="hs-comment">-- * Working with predicates</span><span>
+</span><a name="line-130"></a><span>  </span><span class="hs-comment">-- ** Filtering</span><span>
+</span><a name="line-131"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.filter</span><span>
+</span><a name="line-132"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.ifilter</span><span>
+</span><a name="line-133"></a><span class="hs-cpp">#if MIN_VERSION_vector(0,12,0)
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.uniq</span><span>
+</span><a name="line-135"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.mapMaybe</span><span>
+</span><a name="line-136"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.imapMaybe</span><span>
+</span><a name="line-137"></a><span class="hs-cpp">#endif
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.filterM</span><span>
+</span><a name="line-139"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.takeWhile</span><span>
+</span><a name="line-140"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.dropWhile</span><span>
+</span><a name="line-141"></a><span>
+</span><a name="line-142"></a><span>  </span><span class="hs-comment">-- ** Partitioning</span><span>
+</span><a name="line-143"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.partition</span><span>
+</span><a name="line-144"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.unstablePartition</span><span>
+</span><a name="line-145"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.span</span><span>
+</span><a name="line-146"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.break</span><span>
+</span><a name="line-147"></a><span>
+</span><a name="line-148"></a><span>  </span><span class="hs-comment">-- ** Searching</span><span>
+</span><a name="line-149"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.elem</span><span>
+</span><a name="line-150"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.notElem</span><span>
+</span><a name="line-151"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.find</span><span>
+</span><a name="line-152"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.findIndex</span><span>
+</span><a name="line-153"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.findIndices</span><span>
+</span><a name="line-154"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.elemIndex</span><span>
+</span><a name="line-155"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.elemIndices</span><span>
+</span><a name="line-156"></a><span>
+</span><a name="line-157"></a><span>  </span><span class="hs-comment">-- * Folding</span><span>
+</span><a name="line-158"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.foldl</span><span>
+</span><a name="line-159"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.foldl'</span><span>
+</span><a name="line-160"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.foldr</span><span>
+</span><a name="line-161"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.foldr'</span><span>
+</span><a name="line-162"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.ifoldl</span><span>
+</span><a name="line-163"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.ifoldl'</span><span>
+</span><a name="line-164"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.ifoldr</span><span>
+</span><a name="line-165"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.ifoldr'</span><span>
+</span><a name="line-166"></a><span>
+</span><a name="line-167"></a><span>  </span><span class="hs-comment">-- ** Specialised folds</span><span>
+</span><a name="line-168"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.all</span><span>
+</span><a name="line-169"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.any</span><span>
+</span><a name="line-170"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.and</span><span>
+</span><a name="line-171"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.or</span><span>
+</span><a name="line-172"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.sum</span><span>
+</span><a name="line-173"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.product</span><span>
+</span><a name="line-174"></a><span>
+</span><a name="line-175"></a><span>  </span><span class="hs-comment">-- ** Monadic folds</span><span>
+</span><a name="line-176"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.foldM</span><span>
+</span><a name="line-177"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.ifoldM</span><span>
+</span><a name="line-178"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.foldM'</span><span>
+</span><a name="line-179"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.ifoldM'</span><span>
+</span><a name="line-180"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.foldM_</span><span>
+</span><a name="line-181"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.ifoldM_</span><span>
+</span><a name="line-182"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.foldM'_</span><span>
+</span><a name="line-183"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.ifoldM'_</span><span>
+</span><a name="line-184"></a><span>
+</span><a name="line-185"></a><span>  </span><span class="hs-comment">-- ** Monadic sequencing</span><span>
+</span><a name="line-186"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.sequence</span><span>
+</span><a name="line-187"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.sequence_</span><span>
+</span><a name="line-188"></a><span>
+</span><a name="line-189"></a><span>  </span><span class="hs-comment">-- * Prefix sums (scans)</span><span>
+</span><a name="line-190"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.prescanl</span><span>
+</span><a name="line-191"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.prescanl'</span><span>
+</span><a name="line-192"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.postscanl</span><span>
+</span><a name="line-193"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.postscanl'</span><span>
+</span><a name="line-194"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.scanl</span><span>
+</span><a name="line-195"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.scanl'</span><span>
+</span><a name="line-196"></a><span class="hs-cpp">#if MIN_VERSION_vector(0,12,0)
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.iscanl</span><span>
+</span><a name="line-198"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.iscanl'</span><span>
+</span><a name="line-199"></a><span class="hs-cpp">#endif
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.prescanr</span><span>
+</span><a name="line-201"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.prescanr'</span><span>
+</span><a name="line-202"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.postscanr</span><span>
+</span><a name="line-203"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.postscanr'</span><span>
+</span><a name="line-204"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.scanr</span><span>
+</span><a name="line-205"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.scanr'</span><span>
+</span><a name="line-206"></a><span class="hs-cpp">#if MIN_VERSION_vector(0,12,0)
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.iscanr</span><span>
+</span><a name="line-208"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.iscanr'</span><span>
+</span><a name="line-209"></a><span class="hs-cpp">#endif
+</span><span>
+</span><a name="line-211"></a><span>  </span><span class="hs-comment">-- * Conversions</span><span>
+</span><a name="line-212"></a><span>  </span><span class="hs-comment">-- ** Lists</span><span>
+</span><a name="line-213"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.toList</span><span>
+</span><a name="line-214"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.fromList</span><span>
+</span><a name="line-215"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.fromListN</span><span>
+</span><a name="line-216"></a><span>
+</span><a name="line-217"></a><span>  </span><span class="hs-comment">-- ** Different vector types</span><span>
+</span><a name="line-218"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.convert</span><span>
+</span><a name="line-219"></a><span>
+</span><a name="line-220"></a><span>  </span><span class="hs-comment">-- ** Mutable vectors</span><span>
+</span><a name="line-221"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.freeze</span><span>
+</span><a name="line-222"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.thaw</span><span>
+</span><a name="line-223"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.copy</span><span>
+</span><a name="line-224"></a><span>
+</span><a name="line-225"></a><span>  </span><span class="hs-comment">-- * Fusion support</span><span>
+</span><a name="line-226"></a><span>  </span><span class="hs-comment">-- ** Conversion to/from Bundles</span><span>
+</span><a name="line-227"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.stream</span><span>
+</span><a name="line-228"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.unstream</span><span>
+</span><a name="line-229"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.streamR</span><span>
+</span><a name="line-230"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.unstreamR</span><span>
+</span><a name="line-231"></a><span>
+</span><a name="line-232"></a><span>  </span><span class="hs-comment">-- ** Recycling support</span><span>
+</span><a name="line-233"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.new</span><span>
+</span><a name="line-234"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.clone</span><span>
+</span><a name="line-235"></a><span>
+</span><a name="line-236"></a><span>  </span><span class="hs-comment">-- * Utilities</span><span>
+</span><a name="line-237"></a><span>  </span><span class="hs-comment">-- ** Comparisons</span><span>
+</span><a name="line-238"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.eq</span><span>
+</span><a name="line-239"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.cmp</span><span>
+</span><a name="line-240"></a><span class="hs-cpp">#if MIN_VERSION_vector(0,12,0)
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.eqBy</span><span>
+</span><a name="line-242"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.cmpBy</span><span>
+</span><a name="line-243"></a><span class="hs-cpp">#endif
+</span><span>
+</span><a name="line-245"></a><span>  </span><span class="hs-comment">-- ** Show and Read</span><span>
+</span><a name="line-246"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.showsPrec</span><span>
+</span><a name="line-247"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.readPrec</span><span>
+</span><a name="line-248"></a><span class="hs-cpp">#if MIN_VERSION_vector(0,12,0)
+</span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.liftShowsPrec</span><span>
+</span><a name="line-250"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.liftReadsPrec</span><span>
+</span><a name="line-251"></a><span class="hs-cpp">#endif
+</span><span>
+</span><a name="line-253"></a><span>  </span><span class="hs-comment">-- ** @Data@ and @Typeable@</span><span>
+</span><a name="line-254"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.gfoldl</span><span>
+</span><a name="line-255"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.dataCast</span><span>
+</span><a name="line-256"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Generic.mkType</span><span>
+</span><a name="line-257"></a><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><a name="line-258"></a><span>
+</span><a name="line-259"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Vector.Generic</span><span>
+</span><a name="line-260"></a></pre></body></html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-comment">-- | Storable @Vector@ unsafe functions. These perform no bounds</span><span>
+</span><a name="line-2"></a><span class="hs-comment">--   checking, and may cause segmentation faults etc.!  Import as:</span><span>
+</span><a name="line-3"></a><span class="hs-comment">--</span><span>
+</span><a name="line-4"></a><span class="hs-comment">-- &gt; import qualified RIO.Vector.Storable.Unsafe as VS'</span><span>
+</span><a name="line-5"></a><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">RIO.Vector.Storable.Unsafe</span><span>
+</span><a name="line-6"></a><span>  </span><span class="hs-special">(</span><span>
+</span><a name="line-7"></a><span>  </span><span class="hs-comment">-- * Accessors</span><span>
+</span><a name="line-8"></a><span>  </span><span class="hs-comment">-- ** Indexing</span><span>
+</span><a name="line-9"></a><span>    </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeIndex</span><span>
+</span><a name="line-10"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeHead</span><span>
+</span><a name="line-11"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeLast</span><span>
+</span><a name="line-12"></a><span>
+</span><a name="line-13"></a><span>  </span><span class="hs-comment">-- ** Monadic indexing</span><span>
+</span><a name="line-14"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeIndexM</span><span>
+</span><a name="line-15"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeHeadM</span><span>
+</span><a name="line-16"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeLastM</span><span>
+</span><a name="line-17"></a><span>
+</span><a name="line-18"></a><span>  </span><span class="hs-comment">-- ** Extracting subvectors</span><span>
+</span><a name="line-19"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeSlice</span><span>
+</span><a name="line-20"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeInit</span><span>
+</span><a name="line-21"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeTail</span><span>
+</span><a name="line-22"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeTake</span><span>
+</span><a name="line-23"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeDrop</span><span>
+</span><a name="line-24"></a><span>
+</span><a name="line-25"></a><span>  </span><span class="hs-comment">-- * Modifying vectors</span><span>
+</span><a name="line-26"></a><span>  </span><span class="hs-comment">-- ** Bulk updates</span><span>
+</span><a name="line-27"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeUpd</span><span>
+</span><a name="line-28"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeUpdate_</span><span>
+</span><a name="line-29"></a><span>
+</span><a name="line-30"></a><span>  </span><span class="hs-comment">-- ** Accumulations</span><span>
+</span><a name="line-31"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeAccum</span><span>
+</span><a name="line-32"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeAccumulate_</span><span>
+</span><a name="line-33"></a><span>
+</span><a name="line-34"></a><span>  </span><span class="hs-comment">-- ** Permutations</span><span>
+</span><a name="line-35"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeBackpermute</span><span>
+</span><a name="line-36"></a><span>
+</span><a name="line-37"></a><span>  </span><span class="hs-comment">-- * Conversions</span><span>
+</span><a name="line-38"></a><span>  </span><span class="hs-comment">-- ** Mutable vectors</span><span>
+</span><a name="line-39"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeFreeze</span><span>
+</span><a name="line-40"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeThaw</span><span>
+</span><a name="line-41"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeCopy</span><span>
+</span><a name="line-42"></a><span>
+</span><a name="line-43"></a><span>  </span><span class="hs-comment">-- * Raw pointers</span><span>
+</span><a name="line-44"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeFromForeignPtr</span><span>
+</span><a name="line-45"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeFromForeignPtr0</span><span>
+</span><a name="line-46"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeToForeignPtr</span><span>
+</span><a name="line-47"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeToForeignPtr0</span><span>
+</span><a name="line-48"></a><span>  </span><span class="hs-special">,</span><span> </span><a href="RIO.Vector.Storable.Unsafe.html#unsafeWith"><span class="hs-identifier hs-var">unsafeWith</span></a><span>
+</span><a name="line-49"></a><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><a name="line-50"></a><span>
+</span><a name="line-51"></a><span class="hs-keyword">import</span><span> </span><span class="hs-identifier">Data.Vector.Storable</span><span class="hs-special">(</span><span class="hs-identifier hs-type">Storable</span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Vector</span><span class="hs-special">)</span><span>
+</span><a name="line-52"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Vector.Storable</span><span>
+</span><a name="line-53"></a><span class="hs-keyword">import</span><span> </span><span class="hs-identifier">Foreign.Ptr</span><span class="hs-special">(</span><span class="hs-identifier hs-type">Ptr</span><span class="hs-special">)</span><span>
+</span><a name="line-54"></a><span class="hs-keyword">import</span><span> </span><span class="hs-identifier">UnliftIO</span><span>
+</span><a name="line-55"></a><span>
+</span><a name="line-56"></a><span class="hs-comment">-- | Lifted version of 'Data.Vector.Storable.unsafeWith'</span><span>
+</span><a name="line-57"></a><span class="hs-identifier">unsafeWith</span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-type">MonadUnliftIO</span><span> </span><a href="#local-6989586621679127045"><span class="hs-identifier hs-type">m</span></a><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Storable</span><span> </span><a href="#local-6989586621679127046"><span class="hs-identifier hs-type">a</span></a><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="hs-identifier hs-type">Vector</span><span> </span><a href="#local-6989586621679127046"><span class="hs-identifier hs-type">a</span></a><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-type">Ptr</span><span> </span><a href="#local-6989586621679127046"><span class="hs-identifier hs-type">a</span></a><span> </span><span class="hs-glyph">-&gt;</span><span> </span><a href="#local-6989586621679127045"><span class="hs-identifier hs-type">m</span></a><span> </span><a href="#local-6989586621679127047"><span class="hs-identifier hs-type">b</span></a><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><a href="#local-6989586621679127045"><span class="hs-identifier hs-type">m</span></a><span> </span><a href="#local-6989586621679127047"><span class="hs-identifier hs-type">b</span></a><span>
+</span><a name="line-58"></a><a name="unsafeWith"><a href="RIO.Vector.Storable.Unsafe.html#unsafeWith"><span class="hs-identifier">unsafeWith</span></a></a><span> </span><a name="local-6989586621679127048"><a href="#local-6989586621679127048"><span class="hs-identifier">vec</span></a></a><span> </span><a name="local-6989586621679127049"><a href="#local-6989586621679127049"><span class="hs-identifier">action</span></a></a><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-identifier hs-var">withRunInIO</span><span> </span><span class="hs-operator hs-var">$</span><span> </span><span class="hs-glyph">\</span><a name="local-6989586621679127050"><a href="#local-6989586621679127050"><span class="hs-identifier">unlifter</span></a></a><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.unsafeWith</span><span> </span><a href="#local-6989586621679127048"><span class="hs-identifier hs-var">vec</span></a><span> </span><span class="hs-special">(</span><a href="#local-6989586621679127050"><span class="hs-identifier hs-var">unlifter</span></a><span> </span><span class="hs-operator hs-var">.</span><span> </span><a href="#local-6989586621679127049"><span class="hs-identifier hs-var">action</span></a><span class="hs-special">)</span><span>
+</span><a name="line-59"></a></pre></body></html>

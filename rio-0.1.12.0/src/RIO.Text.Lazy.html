@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-comment">-- | Lazy @Text@. Import as:</span><span>
+</span><a name="line-2"></a><span class="hs-comment">--</span><span>
+</span><a name="line-3"></a><span class="hs-comment">-- &gt; import qualified RIO.Text.Lazy as TL</span><span>
+</span><a name="line-4"></a><span class="hs-comment">--</span><span>
+</span><a name="line-5"></a><span class="hs-comment">-- This module does not export any partial functions.  For those, see</span><span>
+</span><a name="line-6"></a><span class="hs-comment">-- &quot;RIO.Text.Lazy.Partial&quot;</span><span>
+</span><a name="line-7"></a><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">RIO.Text.Lazy</span><span>
+</span><a name="line-8"></a><span>    </span><span class="hs-special">(</span><span>
+</span><a name="line-9"></a><span>    </span><span class="hs-comment">-- * Types</span><span>
+</span><a name="line-10"></a><span>      </span><span class="hs-identifier hs-type">Data.Text.Lazy.Text</span><span>
+</span><a name="line-11"></a><span>
+</span><a name="line-12"></a><span>    </span><span class="hs-comment">-- * Creation and elimination</span><span>
+</span><a name="line-13"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.pack</span><span>
+</span><a name="line-14"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.unpack</span><span>
+</span><a name="line-15"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.singleton</span><span>
+</span><a name="line-16"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.empty</span><span>
+</span><a name="line-17"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.fromChunks</span><span>
+</span><a name="line-18"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.toChunks</span><span>
+</span><a name="line-19"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.toStrict</span><span>
+</span><a name="line-20"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.fromStrict</span><span>
+</span><a name="line-21"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.foldrChunks</span><span>
+</span><a name="line-22"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.foldlChunks</span><span>
+</span><a name="line-23"></a><span>
+</span><a name="line-24"></a><span>    </span><span class="hs-comment">-- * Basic interface</span><span>
+</span><a name="line-25"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.cons</span><span>
+</span><a name="line-26"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.snoc</span><span>
+</span><a name="line-27"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.append</span><span>
+</span><a name="line-28"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.uncons</span><span>
+</span><a name="line-29"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.null</span><span>
+</span><a name="line-30"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.length</span><span>
+</span><a name="line-31"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.compareLength</span><span>
+</span><a name="line-32"></a><span>
+</span><a name="line-33"></a><span>    </span><span class="hs-comment">-- * Transformations</span><span>
+</span><a name="line-34"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.map</span><span>
+</span><a name="line-35"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.intercalate</span><span>
+</span><a name="line-36"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.intersperse</span><span>
+</span><a name="line-37"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.transpose</span><span>
+</span><a name="line-38"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.reverse</span><span>
+</span><a name="line-39"></a><span>
+</span><a name="line-40"></a><span>    </span><span class="hs-comment">-- ** Case conversion</span><span>
+</span><a name="line-41"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.toCaseFold</span><span>
+</span><a name="line-42"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.toLower</span><span>
+</span><a name="line-43"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.toUpper</span><span>
+</span><a name="line-44"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.toTitle</span><span>
+</span><a name="line-45"></a><span>
+</span><a name="line-46"></a><span>    </span><span class="hs-comment">-- ** Justification</span><span>
+</span><a name="line-47"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.justifyLeft</span><span>
+</span><a name="line-48"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.justifyRight</span><span>
+</span><a name="line-49"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.center</span><span>
+</span><a name="line-50"></a><span>
+</span><a name="line-51"></a><span>    </span><span class="hs-comment">-- * Folds</span><span>
+</span><a name="line-52"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.foldl</span><span>
+</span><a name="line-53"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.foldl'</span><span>
+</span><a name="line-54"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.foldr</span><span>
+</span><a name="line-55"></a><span>
+</span><a name="line-56"></a><span>    </span><span class="hs-comment">-- ** Special folds</span><span>
+</span><a name="line-57"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.concat</span><span>
+</span><a name="line-58"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.concatMap</span><span>
+</span><a name="line-59"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.any</span><span>
+</span><a name="line-60"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.all</span><span>
+</span><a name="line-61"></a><span>
+</span><a name="line-62"></a><span>    </span><span class="hs-comment">-- * Construction</span><span>
+</span><a name="line-63"></a><span>
+</span><a name="line-64"></a><span>    </span><span class="hs-comment">-- ** Scans</span><span>
+</span><a name="line-65"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.scanl</span><span>
+</span><a name="line-66"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.scanl1</span><span>  </span><span class="hs-comment">-- NB. scanl1 and scanr1 are not partial</span><span>
+</span><a name="line-67"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.scanr</span><span>
+</span><a name="line-68"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.scanr1</span><span>
+</span><a name="line-69"></a><span>
+</span><a name="line-70"></a><span>    </span><span class="hs-comment">-- ** Accumulating maps</span><span>
+</span><a name="line-71"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.mapAccumL</span><span>
+</span><a name="line-72"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.mapAccumR</span><span>
+</span><a name="line-73"></a><span>
+</span><a name="line-74"></a><span>    </span><span class="hs-comment">-- ** Generation and unfolding</span><span>
+</span><a name="line-75"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.repeat</span><span>
+</span><a name="line-76"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.replicate</span><span>
+</span><a name="line-77"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.cycle</span><span>
+</span><a name="line-78"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.iterate</span><span>
+</span><a name="line-79"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.unfoldr</span><span>
+</span><a name="line-80"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.unfoldrN</span><span>
+</span><a name="line-81"></a><span>
+</span><a name="line-82"></a><span>    </span><span class="hs-comment">-- * Substrings</span><span>
+</span><a name="line-83"></a><span>
+</span><a name="line-84"></a><span>    </span><span class="hs-comment">-- ** Breaking strings</span><span>
+</span><a name="line-85"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.take</span><span>
+</span><a name="line-86"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.takeEnd</span><span>
+</span><a name="line-87"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.drop</span><span>
+</span><a name="line-88"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.dropEnd</span><span>
+</span><a name="line-89"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.takeWhile</span><span>
+</span><a name="line-90"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.takeWhileEnd</span><span>
+</span><a name="line-91"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.dropWhile</span><span>
+</span><a name="line-92"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.dropWhileEnd</span><span>
+</span><a name="line-93"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.dropAround</span><span>
+</span><a name="line-94"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.strip</span><span>
+</span><a name="line-95"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.stripStart</span><span>
+</span><a name="line-96"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.stripEnd</span><span>
+</span><a name="line-97"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.splitAt</span><span>
+</span><a name="line-98"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.span</span><span>
+</span><a name="line-99"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.break</span><span>
+</span><a name="line-100"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.group</span><span>
+</span><a name="line-101"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.groupBy</span><span>
+</span><a name="line-102"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.inits</span><span>
+</span><a name="line-103"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.tails</span><span>
+</span><a name="line-104"></a><span>
+</span><a name="line-105"></a><span>    </span><span class="hs-comment">-- ** Breaking into many substrings</span><span>
+</span><a name="line-106"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.split</span><span>
+</span><a name="line-107"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.chunksOf</span><span>
+</span><a name="line-108"></a><span>
+</span><a name="line-109"></a><span>    </span><span class="hs-comment">-- ** Breaking into lines and words</span><span>
+</span><a name="line-110"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.lines</span><span>
+</span><a name="line-111"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.words</span><span>
+</span><a name="line-112"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.unlines</span><span>
+</span><a name="line-113"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.unwords</span><span>
+</span><a name="line-114"></a><span>
+</span><a name="line-115"></a><span>    </span><span class="hs-comment">-- * Predicates</span><span>
+</span><a name="line-116"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.isPrefixOf</span><span>
+</span><a name="line-117"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.isSuffixOf</span><span>
+</span><a name="line-118"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.isInfixOf</span><span>
+</span><a name="line-119"></a><span>
+</span><a name="line-120"></a><span>    </span><span class="hs-comment">-- ** View patterns</span><span>
+</span><a name="line-121"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.stripPrefix</span><span>
+</span><a name="line-122"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.stripSuffix</span><span>
+</span><a name="line-123"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.commonPrefixes</span><span>
+</span><a name="line-124"></a><span>
+</span><a name="line-125"></a><span>    </span><span class="hs-comment">-- * Searching</span><span>
+</span><a name="line-126"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.filter</span><span>
+</span><a name="line-127"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.find</span><span>
+</span><a name="line-128"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.partition</span><span>
+</span><a name="line-129"></a><span>
+</span><a name="line-130"></a><span>    </span><span class="hs-comment">-- * Indexing</span><span>
+</span><a name="line-131"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.index</span><span>
+</span><a name="line-132"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.count</span><span>
+</span><a name="line-133"></a><span>
+</span><a name="line-134"></a><span>    </span><span class="hs-comment">-- * Zipping and unzipping</span><span>
+</span><a name="line-135"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.zip</span><span>
+</span><a name="line-136"></a><span>    </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Text.Lazy.zipWith</span><span>
+</span><a name="line-137"></a><span>    </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><a name="line-138"></a><span>
+</span><a name="line-139"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Text.Lazy</span><span>
+</span><a name="line-140"></a></pre></body></html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-comment">-- | Storable @Vector@ partial functions. Import as:</span><span>
+</span><a name="line-2"></a><span class="hs-comment">--</span><span>
+</span><a name="line-3"></a><span class="hs-comment">-- &gt; import qualified RIO.Vector.Storable.Partial as VS'</span><span>
+</span><a name="line-4"></a><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">RIO.Vector.Storable.Partial</span><span>
+</span><a name="line-5"></a><span>  </span><span class="hs-special">(</span><span>
+</span><a name="line-6"></a><span>  </span><span class="hs-comment">-- * Accessors</span><span>
+</span><a name="line-7"></a><span>  </span><span class="hs-comment">-- ** Indexing</span><span>
+</span><a name="line-8"></a><span>    </span><span class="hs-special">(</span><span class="hs-operator hs-var">Data.Vector.Storable.!</span><span class="hs-special">)</span><span>
+</span><a name="line-9"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.head</span><span>
+</span><a name="line-10"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.last</span><span>
+</span><a name="line-11"></a><span>
+</span><a name="line-12"></a><span>  </span><span class="hs-comment">-- ** Monadic indexing</span><span>
+</span><a name="line-13"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.indexM</span><span>
+</span><a name="line-14"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.headM</span><span>
+</span><a name="line-15"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.lastM</span><span>
+</span><a name="line-16"></a><span>
+</span><a name="line-17"></a><span>  </span><span class="hs-comment">-- ** Extracting subvectors</span><span>
+</span><a name="line-18"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.init</span><span>
+</span><a name="line-19"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.tail</span><span>
+</span><a name="line-20"></a><span>
+</span><a name="line-21"></a><span>  </span><span class="hs-comment">-- * Modifying vectors</span><span>
+</span><a name="line-22"></a><span>  </span><span class="hs-comment">-- ** Bulk updates</span><span>
+</span><a name="line-23"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="hs-operator hs-var">Data.Vector.Storable.//</span><span class="hs-special">)</span><span>
+</span><a name="line-24"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.update_</span><span>
+</span><a name="line-25"></a><span>
+</span><a name="line-26"></a><span>  </span><span class="hs-comment">-- ** Accumulations</span><span>
+</span><a name="line-27"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.accum</span><span>
+</span><a name="line-28"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.accumulate_</span><span>
+</span><a name="line-29"></a><span>
+</span><a name="line-30"></a><span>  </span><span class="hs-comment">-- ** Permutations</span><span>
+</span><a name="line-31"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.backpermute</span><span>
+</span><a name="line-32"></a><span>
+</span><a name="line-33"></a><span>  </span><span class="hs-comment">-- * Folding</span><span>
+</span><a name="line-34"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.foldl1</span><span>
+</span><a name="line-35"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.foldl1'</span><span>
+</span><a name="line-36"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.foldr1</span><span>
+</span><a name="line-37"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.foldr1'</span><span>
+</span><a name="line-38"></a><span>
+</span><a name="line-39"></a><span>  </span><span class="hs-comment">-- ** Specialised folds</span><span>
+</span><a name="line-40"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.maximum</span><span>
+</span><a name="line-41"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.maximumBy</span><span>
+</span><a name="line-42"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.minimum</span><span>
+</span><a name="line-43"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.minimumBy</span><span>
+</span><a name="line-44"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.minIndex</span><span>
+</span><a name="line-45"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.minIndexBy</span><span>
+</span><a name="line-46"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.maxIndex</span><span>
+</span><a name="line-47"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.maxIndexBy</span><span>
+</span><a name="line-48"></a><span>
+</span><a name="line-49"></a><span>  </span><span class="hs-comment">-- ** Monadic folds</span><span>
+</span><a name="line-50"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.fold1M</span><span>
+</span><a name="line-51"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.fold1M'</span><span>
+</span><a name="line-52"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.fold1M_</span><span>
+</span><a name="line-53"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.fold1M'_</span><span>
+</span><a name="line-54"></a><span>
+</span><a name="line-55"></a><span>  </span><span class="hs-comment">-- * Prefix sums (scans)</span><span>
+</span><a name="line-56"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.scanl1</span><span>
+</span><a name="line-57"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.scanl1'</span><span>
+</span><a name="line-58"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.scanr1</span><span>
+</span><a name="line-59"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.Vector.Storable.scanr1'</span><span>
+</span><a name="line-60"></a><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><a name="line-61"></a><span>
+</span><a name="line-62"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Vector.Storable</span><span>
+</span><a name="line-63"></a></pre></body></html>

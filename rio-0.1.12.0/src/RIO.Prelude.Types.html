@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">RIO.Prelude.Types</span><span>
+</span><a name="line-2"></a><span>  </span><span class="hs-special">(</span><span>
+</span><a name="line-3"></a><span>    </span><span class="hs-comment">-- * @base@</span><span>
+</span><a name="line-4"></a><span>    </span><span class="hs-comment">-- ** Types</span><span>
+</span><a name="line-5"></a><span>    </span><span class="hs-comment">-- *** @Bool@</span><span>
+</span><a name="line-6"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Bool&quot;:</span><span>
+</span><a name="line-7"></a><span>    </span><span class="hs-identifier hs-type">Data.Bool.Bool</span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><a name="line-8"></a><span>    </span><span class="hs-comment">-- *** @Char@ (@String@)</span><span>
+</span><a name="line-9"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Char&quot;:</span><span>
+</span><a name="line-10"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Char.Char</span><span>
+</span><a name="line-11"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.String&quot;:</span><span>
+</span><a name="line-12"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.String.String</span><span>
+</span><a name="line-13"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;System.IO&quot;:</span><span>
+</span><a name="line-14"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">System.IO.FilePath</span><span>
+</span><a name="line-15"></a><span>    </span><span class="hs-comment">-- *** @Ordering@</span><span>
+</span><a name="line-16"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Ord&quot;:</span><span>
+</span><a name="line-17"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Ord.Ordering</span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><a name="line-18"></a><span>    </span><span class="hs-comment">-- *** Numbers</span><span>
+</span><a name="line-19"></a><span>    </span><span class="hs-comment">-- **** @Int@</span><span>
+</span><a name="line-20"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Int&quot;:</span><span>
+</span><a name="line-21"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Int.Int</span><span>
+</span><a name="line-22"></a><span>    </span><span class="hs-comment">-- ***** @Int8@</span><span>
+</span><a name="line-23"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Int.Int8</span><span>
+</span><a name="line-24"></a><span>    </span><span class="hs-comment">-- ***** @Int16@</span><span>
+</span><a name="line-25"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Int.Int16</span><span>
+</span><a name="line-26"></a><span>    </span><span class="hs-comment">-- ***** @Int32@</span><span>
+</span><a name="line-27"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Int.Int32</span><span>
+</span><a name="line-28"></a><span>    </span><span class="hs-comment">-- ***** @Int64@</span><span>
+</span><a name="line-29"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Int.Int64</span><span>
+</span><a name="line-30"></a><span>    </span><span class="hs-comment">-- **** @Word@</span><span>
+</span><a name="line-31"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Word&quot;:</span><span>
+</span><a name="line-32"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Word.Word</span><span>
+</span><a name="line-33"></a><span>    </span><span class="hs-comment">-- ***** @Word8@</span><span>
+</span><a name="line-34"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Word.Word8</span><span>
+</span><a name="line-35"></a><span>    </span><span class="hs-comment">-- ***** @Word16@</span><span>
+</span><a name="line-36"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Word.Word16</span><span>
+</span><a name="line-37"></a><span>    </span><span class="hs-comment">-- ***** @Word32@</span><span>
+</span><a name="line-38"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Word.Word32</span><span>
+</span><a name="line-39"></a><span>    </span><span class="hs-comment">-- ***** @Word64@</span><span>
+</span><a name="line-40"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Word.Word64</span><span>
+</span><a name="line-41"></a><span>    </span><span class="hs-comment">-- **** @Integer@</span><span>
+</span><a name="line-42"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Prelude.Integer&quot;:</span><span>
+</span><a name="line-43"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Prelude.Integer</span><span>
+</span><a name="line-44"></a><span>    </span><span class="hs-comment">-- **** @Natural@</span><span>
+</span><a name="line-45"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Numeric.Natural&quot;:</span><span>
+</span><a name="line-46"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Numeric.Natural.Natural</span><span>
+</span><a name="line-47"></a><span>    </span><span class="hs-comment">-- **** @Rational@</span><span>
+</span><a name="line-48"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Ratio&quot;:</span><span>
+</span><a name="line-49"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Ratio.Rational</span><span>
+</span><a name="line-50"></a><span>    </span><span class="hs-comment">-- **** @Float@</span><span>
+</span><a name="line-51"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Prelude&quot;:</span><span>
+</span><a name="line-52"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Prelude.Float</span><span>
+</span><a name="line-53"></a><span>    </span><span class="hs-comment">-- **** @Double@</span><span>
+</span><a name="line-54"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Prelude&quot;:</span><span>
+</span><a name="line-55"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Prelude.Double</span><span>
+</span><a name="line-56"></a><span>
+</span><a name="line-57"></a><span>    </span><span class="hs-comment">-- *** @Maybe@</span><span>
+</span><a name="line-58"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Maybe&quot;:</span><span>
+</span><a name="line-59"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Maybe.Maybe</span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><a name="line-60"></a><span>    </span><span class="hs-comment">-- *** @Either@</span><span>
+</span><a name="line-61"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Either&quot;:</span><span>
+</span><a name="line-62"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Either.Either</span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><a name="line-63"></a><span>    </span><span class="hs-comment">-- *** @NonEmpty@</span><span>
+</span><a name="line-64"></a><span>    </span><span class="hs-comment">-- | Re-exported from Data.List.NonEmpty</span><span>
+</span><a name="line-65"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.List.NonEmpty.NonEmpty</span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><a name="line-66"></a><span>    </span><span class="hs-comment">-- *** @Proxy@</span><span>
+</span><a name="line-67"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Proxy&quot;:</span><span>
+</span><a name="line-68"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Proxy.Proxy</span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><a name="line-69"></a><span>    </span><span class="hs-comment">-- *** @Void@</span><span>
+</span><a name="line-70"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Void&quot;:</span><span>
+</span><a name="line-71"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Void.Void</span><span>
+</span><a name="line-72"></a><span>    </span><span class="hs-comment">-- *** @Const@</span><span>
+</span><a name="line-73"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Functor.Const&quot;:</span><span>
+</span><a name="line-74"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Functor.Const.Const</span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><a name="line-75"></a><span>    </span><span class="hs-comment">-- *** @Identity@</span><span>
+</span><a name="line-76"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Functor.Identity&quot;:</span><span>
+</span><a name="line-77"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Functor.Identity.Identity</span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><a name="line-78"></a><span>    </span><span class="hs-comment">-- *** @IO@</span><span>
+</span><a name="line-79"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;System.IO&quot;:</span><span>
+</span><a name="line-80"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">System.IO.IO</span><span>
+</span><a name="line-81"></a><span>    </span><span class="hs-comment">-- *** @ST@</span><span>
+</span><a name="line-82"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Monad.ST&quot;:</span><span>
+</span><a name="line-83"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Monad.ST.ST</span><span>
+</span><a name="line-84"></a><span>
+</span><a name="line-85"></a><span>    </span><span class="hs-comment">-- ** Type Classes</span><span>
+</span><a name="line-86"></a><span>
+</span><a name="line-87"></a><span>    </span><span class="hs-comment">-- *** @Eq@</span><span>
+</span><a name="line-88"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Eq&quot;:</span><span>
+</span><a name="line-89"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Eq.Eq</span><span>
+</span><a name="line-90"></a><span>
+</span><a name="line-91"></a><span>    </span><span class="hs-comment">-- *** @Ord@</span><span>
+</span><a name="line-92"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Ord&quot;:</span><span>
+</span><a name="line-93"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Ord.Ord</span><span>
+</span><a name="line-94"></a><span>
+</span><a name="line-95"></a><span>    </span><span class="hs-comment">-- *** @Bounded@</span><span>
+</span><a name="line-96"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Prelude&quot;:</span><span>
+</span><a name="line-97"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Prelude.Bounded</span><span>
+</span><a name="line-98"></a><span>
+</span><a name="line-99"></a><span>    </span><span class="hs-comment">-- *** @Enum@</span><span>
+</span><a name="line-100"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Prelude&quot;:</span><span>
+</span><a name="line-101"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Prelude.Enum</span><span>
+</span><a name="line-102"></a><span>
+</span><a name="line-103"></a><span>    </span><span class="hs-comment">-- *** Strings</span><span>
+</span><a name="line-104"></a><span>    </span><span class="hs-comment">-- **** @Show@</span><span>
+</span><a name="line-105"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Text.Show&quot;:</span><span>
+</span><a name="line-106"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Text.Show.Show</span><span>
+</span><a name="line-107"></a><span>    </span><span class="hs-comment">-- **** @Read@</span><span>
+</span><a name="line-108"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Text.Read&quot;:</span><span>
+</span><a name="line-109"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Text.Read.Read</span><span>
+</span><a name="line-110"></a><span>    </span><span class="hs-comment">-- **** @IsString@</span><span>
+</span><a name="line-111"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.String&quot;:</span><span>
+</span><a name="line-112"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.String.IsString</span><span>
+</span><a name="line-113"></a><span>
+</span><a name="line-114"></a><span>    </span><span class="hs-comment">-- *** Numeric</span><span>
+</span><a name="line-115"></a><span>    </span><span class="hs-comment">-- | All numeric classes are re-exported from &quot;Prelude&quot;:</span><span>
+</span><a name="line-116"></a><span>
+</span><a name="line-117"></a><span>    </span><span class="hs-comment">-- **** @Num@</span><span>
+</span><a name="line-118"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Prelude.Num</span><span>
+</span><a name="line-119"></a><span>    </span><span class="hs-comment">-- **** @Fractional@</span><span>
+</span><a name="line-120"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Prelude.Fractional</span><span>
+</span><a name="line-121"></a><span>    </span><span class="hs-comment">-- **** @Floating@</span><span>
+</span><a name="line-122"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Prelude.Floating</span><span>
+</span><a name="line-123"></a><span>    </span><span class="hs-comment">-- **** @Real@</span><span>
+</span><a name="line-124"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Prelude.Real</span><span>
+</span><a name="line-125"></a><span>    </span><span class="hs-comment">-- **** @Integral@</span><span>
+</span><a name="line-126"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Prelude.Integral</span><span>
+</span><a name="line-127"></a><span>    </span><span class="hs-comment">-- **** @RealFrac@</span><span>
+</span><a name="line-128"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Prelude.RealFrac</span><span>
+</span><a name="line-129"></a><span>    </span><span class="hs-comment">-- **** @RealFloat@</span><span>
+</span><a name="line-130"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Prelude.RealFloat</span><span>
+</span><a name="line-131"></a><span>
+</span><a name="line-132"></a><span>    </span><span class="hs-comment">-- *** Categories</span><span>
+</span><a name="line-133"></a><span>    </span><span class="hs-comment">-- **** @Functor@</span><span>
+</span><a name="line-134"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Functor&quot;:</span><span>
+</span><a name="line-135"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Functor.Functor</span><span>
+</span><a name="line-136"></a><span>    </span><span class="hs-comment">-- **** @Foldable@</span><span>
+</span><a name="line-137"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Foldable&quot;:</span><span>
+</span><a name="line-138"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Foldable.Foldable</span><span>
+</span><a name="line-139"></a><span>    </span><span class="hs-comment">-- **** @Semigroup@</span><span>
+</span><a name="line-140"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Semigroup&quot;:</span><span>
+</span><a name="line-141"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Semigroup.Semigroup</span><span>
+</span><a name="line-142"></a><span>    </span><span class="hs-comment">-- **** @Monoid@</span><span>
+</span><a name="line-143"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Monoid&quot;:</span><span>
+</span><a name="line-144"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Monoid.Monoid</span><span>
+</span><a name="line-145"></a><span>    </span><span class="hs-comment">-- **** @Applicative@</span><span>
+</span><a name="line-146"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Applicative&quot;:</span><span>
+</span><a name="line-147"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Applicative.Applicative</span><span>
+</span><a name="line-148"></a><span>    </span><span class="hs-comment">-- **** @Alternative@</span><span>
+</span><a name="line-149"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Applicative&quot;:</span><span>
+</span><a name="line-150"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Applicative.Alternative</span><span>
+</span><a name="line-151"></a><span>    </span><span class="hs-comment">-- **** @Traversable@</span><span>
+</span><a name="line-152"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Traversable&quot;:</span><span>
+</span><a name="line-153"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Traversable.Traversable</span><span>
+</span><a name="line-154"></a><span>    </span><span class="hs-comment">-- **** @Monad@</span><span>
+</span><a name="line-155"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Monad&quot;:</span><span>
+</span><a name="line-156"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Monad.Monad</span><span>
+</span><a name="line-157"></a><span>    </span><span class="hs-comment">-- **** @MonadPlus@</span><span>
+</span><a name="line-158"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Monad&quot;:</span><span>
+</span><a name="line-159"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Monad.MonadPlus</span><span>
+</span><a name="line-160"></a><span>    </span><span class="hs-comment">-- **** @Category@</span><span>
+</span><a name="line-161"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Category&quot;:</span><span>
+</span><a name="line-162"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Category.Category</span><span>
+</span><a name="line-163"></a><span>    </span><span class="hs-comment">-- **** @Arrow@</span><span>
+</span><a name="line-164"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Arrow&quot;:</span><span>
+</span><a name="line-165"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Arrow.Arrow</span><span>
+</span><a name="line-166"></a><span>    </span><span class="hs-comment">-- **** @MonadFail@</span><span>
+</span><a name="line-167"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Monad.Fail&quot;:</span><span>
+</span><a name="line-168"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Monad.Fail.MonadFail</span><span>
+</span><a name="line-169"></a><span>
+</span><a name="line-170"></a><span>    </span><span class="hs-comment">-- *** Data</span><span>
+</span><a name="line-171"></a><span>    </span><span class="hs-comment">-- **** @Typeable@</span><span>
+</span><a name="line-172"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Monad&quot;:</span><span>
+</span><a name="line-173"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Typeable.Typeable</span><span>
+</span><a name="line-174"></a><span>    </span><span class="hs-comment">-- **** @Data@</span><span>
+</span><a name="line-175"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Data&quot;:</span><span>
+</span><a name="line-176"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Data.Data</span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><a name="line-177"></a><span>    </span><span class="hs-comment">-- **** @Generic@</span><span>
+</span><a name="line-178"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;GHC.Generics&quot;:</span><span>
+</span><a name="line-179"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">GHC.Generics.Generic</span><span>
+</span><a name="line-180"></a><span>    </span><span class="hs-comment">-- **** @Storable@</span><span>
+</span><a name="line-181"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Foreign.Storable&quot;:</span><span>
+</span><a name="line-182"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Foreign.Storable.Storable</span><span>
+</span><a name="line-183"></a><span>
+</span><a name="line-184"></a><span>    </span><span class="hs-comment">-- *** Exceptions</span><span>
+</span><a name="line-185"></a><span>    </span><span class="hs-comment">-- *** @Exception@</span><span>
+</span><a name="line-186"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Exception.Base&quot;:</span><span>
+</span><a name="line-187"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Exception.Base.Exception</span><span>
+</span><a name="line-188"></a><span>    </span><span class="hs-comment">-- **** @HasCallStack@</span><span>
+</span><a name="line-189"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;GHC.Stack&quot;:</span><span>
+</span><a name="line-190"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">GHC.Stack.HasCallStack</span><span>
+</span><a name="line-191"></a><span>
+</span><a name="line-192"></a><span>
+</span><a name="line-193"></a><span>    </span><span class="hs-comment">-- * @deepseq@</span><span>
+</span><a name="line-194"></a><span>    </span><span class="hs-comment">-- ** @NFData@</span><span>
+</span><a name="line-195"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.DeepSeq&quot;:</span><span>
+</span><a name="line-196"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.DeepSeq.NFData</span><span>
+</span><a name="line-197"></a><span>
+</span><a name="line-198"></a><span>    </span><span class="hs-comment">-- * @mtl@</span><span>
+</span><a name="line-199"></a><span>    </span><span class="hs-comment">-- ** @MonadTrans@</span><span>
+</span><a name="line-200"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Monad.Reader&quot;:</span><span>
+</span><a name="line-201"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Monad.Reader.MonadTrans</span><span>
+</span><a name="line-202"></a><span>    </span><span class="hs-comment">-- ** @MonadReader@</span><span>
+</span><a name="line-203"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Monad.Reader.MonadReader</span><span>
+</span><a name="line-204"></a><span>    </span><span class="hs-comment">-- ** @ReaderT@ (@Reader@)</span><span>
+</span><a name="line-205"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Monad.Reader&quot;:</span><span>
+</span><a name="line-206"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Monad.Reader.Reader</span><span>
+</span><a name="line-207"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Monad.Reader.ReaderT</span><span class="hs-special">(</span><span class="hs-identifier hs-var">ReaderT</span><span class="hs-special">)</span><span>
+</span><a name="line-208"></a><span>
+</span><a name="line-209"></a><span>    </span><span class="hs-comment">-- * @exceptions@</span><span>
+</span><a name="line-210"></a><span>    </span><span class="hs-comment">-- ** @MonadThrow@</span><span>
+</span><a name="line-211"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Monad.Catch&quot;:</span><span>
+</span><a name="line-212"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Monad.Catch.MonadThrow</span><span>
+</span><a name="line-213"></a><span>
+</span><a name="line-214"></a><span>    </span><span class="hs-comment">-- * @bytestring@</span><span>
+</span><a name="line-215"></a><span>    </span><span class="hs-comment">-- ** @ByteString@</span><span>
+</span><a name="line-216"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.ByteString&quot;:</span><span>
+</span><a name="line-217"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.ByteString.ByteString</span><span>
+</span><a name="line-218"></a><span>    </span><span class="hs-comment">-- ** @LByteString@</span><span>
+</span><a name="line-219"></a><span>    </span><span class="hs-comment">-- | A synonym for lazy `Data.ByteString.Lazy.ByteString` re-exported from &quot;Data.ByteString.Lazy&quot;:</span><span>
+</span><a name="line-220"></a><span>  </span><span class="hs-special">,</span><span> </span><a href="RIO.Prelude.Renames.html#LByteString"><span class="hs-identifier hs-type">RIO.Prelude.Renames.LByteString</span></a><span>
+</span><a name="line-221"></a><span>    </span><span class="hs-comment">-- ** @Builder@</span><span>
+</span><a name="line-222"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.ByteString.Builder&quot;:</span><span>
+</span><a name="line-223"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.ByteString.Builder.Builder</span><span>
+</span><a name="line-224"></a><span>    </span><span class="hs-comment">-- ** @ShortByteString@</span><span>
+</span><a name="line-225"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.ByteString.Short&quot;:</span><span>
+</span><a name="line-226"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.ByteString.Short.ShortByteString</span><span>
+</span><a name="line-227"></a><span>
+</span><a name="line-228"></a><span>    </span><span class="hs-comment">-- * @text@</span><span>
+</span><a name="line-229"></a><span>    </span><span class="hs-comment">-- ** @Text@</span><span>
+</span><a name="line-230"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Text&quot;:</span><span>
+</span><a name="line-231"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Text.Text</span><span>
+</span><a name="line-232"></a><span>    </span><span class="hs-comment">-- ** @LText@</span><span>
+</span><a name="line-233"></a><span>    </span><span class="hs-comment">-- | A synonym for lazy `Data.Text.Lazy.Text` re-exported from &quot;Data.Text.Lazy&quot;:</span><span>
+</span><a name="line-234"></a><span>  </span><span class="hs-special">,</span><span> </span><a href="RIO.Prelude.Renames.html#LText"><span class="hs-identifier hs-type">RIO.Prelude.Renames.LText</span></a><span>
+</span><a name="line-235"></a><span>    </span><span class="hs-comment">-- ** @UncodeException@</span><span>
+</span><a name="line-236"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Text.Encoding.Error&quot;:</span><span>
+</span><a name="line-237"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Text.Encoding.Error.UnicodeException</span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><a name="line-238"></a><span>
+</span><a name="line-239"></a><span>    </span><span class="hs-comment">-- * @vector@</span><span>
+</span><a name="line-240"></a><span>    </span><span class="hs-comment">-- ** @Vector@</span><span>
+</span><a name="line-241"></a><span>    </span><span class="hs-comment">-- | Boxed vector re-exported from &quot;Data.Vector&quot;:</span><span>
+</span><a name="line-242"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Vector.Vector</span><span>
+</span><a name="line-243"></a><span>    </span><span class="hs-comment">-- ** @UVector@</span><span>
+</span><a name="line-244"></a><span>    </span><span class="hs-comment">-- | A synonym for unboxed `Data.Vector.Unboxed.Vector` re-exported from &quot;Data.Vector.Unboxed&quot;:</span><span>
+</span><a name="line-245"></a><span>  </span><span class="hs-special">,</span><span> </span><a href="RIO.Prelude.Renames.html#UVector"><span class="hs-identifier hs-type">RIO.Prelude.Renames.UVector</span></a><span>
+</span><a name="line-246"></a><span>    </span><span class="hs-comment">-- *** @Unbox@</span><span>
+</span><a name="line-247"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Vector.Unboxed.Unbox</span><span>
+</span><a name="line-248"></a><span>    </span><span class="hs-comment">-- ** @SVector@</span><span>
+</span><a name="line-249"></a><span>    </span><span class="hs-comment">-- | A synonym for storable `Data.Vector.Storable.Vector` re-exported from &quot;Data.Vector.Storable&quot;:</span><span>
+</span><a name="line-250"></a><span>  </span><span class="hs-special">,</span><span> </span><a href="RIO.Prelude.Renames.html#SVector"><span class="hs-identifier hs-type">RIO.Prelude.Renames.SVector</span></a><span>
+</span><a name="line-251"></a><span>    </span><span class="hs-comment">-- ** @GVector@</span><span>
+</span><a name="line-252"></a><span>    </span><span class="hs-comment">-- | A synonym for generic `Data.Vector.Generic.Vector` re-exported from &quot;Data.Vector.Generic&quot;:</span><span>
+</span><a name="line-253"></a><span>  </span><span class="hs-special">,</span><span> </span><a href="RIO.Prelude.Renames.html#GVector"><span class="hs-identifier hs-type">RIO.Prelude.Renames.GVector</span></a><span>
+</span><a name="line-254"></a><span>
+</span><a name="line-255"></a><span>    </span><span class="hs-comment">-- * @containers@</span><span>
+</span><a name="line-256"></a><span>    </span><span class="hs-comment">-- ** @IntMap@</span><span>
+</span><a name="line-257"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.IntMap.Strict&quot;:</span><span>
+</span><a name="line-258"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.IntMap.Strict.IntMap</span><span>
+</span><a name="line-259"></a><span>    </span><span class="hs-comment">-- ** @Map@</span><span>
+</span><a name="line-260"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Map.Strict&quot;:</span><span>
+</span><a name="line-261"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Map.Strict.Map</span><span>
+</span><a name="line-262"></a><span>    </span><span class="hs-comment">-- ** @IntSet@</span><span>
+</span><a name="line-263"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.IntSet&quot;:</span><span>
+</span><a name="line-264"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.IntSet.IntSet</span><span>
+</span><a name="line-265"></a><span>    </span><span class="hs-comment">-- ** @Set@</span><span>
+</span><a name="line-266"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Set&quot;:</span><span>
+</span><a name="line-267"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Set.Set</span><span>
+</span><a name="line-268"></a><span>    </span><span class="hs-comment">-- ** @Seq@</span><span>
+</span><a name="line-269"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.Seq&quot;:</span><span>
+</span><a name="line-270"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Sequence.Seq</span><span>
+</span><a name="line-271"></a><span>
+</span><a name="line-272"></a><span>    </span><span class="hs-comment">-- * @hashable@</span><span>
+</span><a name="line-273"></a><span>    </span><span class="hs-comment">-- ** @Hashable@</span><span>
+</span><a name="line-274"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.Hashable.Hashable</span><span>
+</span><a name="line-275"></a><span>
+</span><a name="line-276"></a><span>    </span><span class="hs-comment">-- * @unordered-containers@</span><span>
+</span><a name="line-277"></a><span>    </span><span class="hs-comment">-- ** @HashMap@</span><span>
+</span><a name="line-278"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.HashMap.Strict&quot;:</span><span>
+</span><a name="line-279"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.HashMap.Strict.HashMap</span><span>
+</span><a name="line-280"></a><span>    </span><span class="hs-comment">-- ** @HashSet@</span><span>
+</span><a name="line-281"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Data.HashSet&quot;:</span><span>
+</span><a name="line-282"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Data.HashSet.HashSet</span><span>
+</span><a name="line-283"></a><span>
+</span><a name="line-284"></a><span>    </span><span class="hs-comment">-- * @primitive@</span><span>
+</span><a name="line-285"></a><span>    </span><span class="hs-comment">-- ** @PrimMonad@</span><span>
+</span><a name="line-286"></a><span>    </span><span class="hs-comment">-- | Re-exported from &quot;Control.Monad.Primitive&quot;:</span><span>
+</span><a name="line-287"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">Control.Monad.Primitive.PrimMonad</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-var">PrimState</span><span class="hs-special">)</span><span>
+</span><a name="line-288"></a><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><a name="line-289"></a><span>
+</span><a name="line-290"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Control.Monad.Primitive</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-type">PrimMonad</span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><a name="line-291"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.ByteString</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-type">ByteString</span><span class="hs-special">)</span><span>
+</span><a name="line-292"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.ByteString.Builder</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-type">Builder</span><span class="hs-special">)</span><span>
+</span><a name="line-293"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Monoid</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-type">Monoid</span><span class="hs-special">)</span><span>
+</span><a name="line-294"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Semigroup</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-type">Semigroup</span><span class="hs-special">)</span><span>
+</span><a name="line-295"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.String</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-type">IsString</span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-type">String</span><span class="hs-special">)</span><span>
+</span><a name="line-296"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Text</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-type">Text</span><span class="hs-special">)</span><span>
+</span><a name="line-297"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Typeable</span><span>
+</span><a name="line-298"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">System.IO</span><span>
+</span><a name="line-299"></a><span>
+</span><a name="line-300"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Vector.Unboxed</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-type">Unbox</span><span class="hs-special">)</span><span>
+</span><a name="line-301"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><a href="RIO.Prelude.Renames.html"><span class="hs-identifier">RIO.Prelude.Renames</span></a><span>
+</span><a name="line-302"></a><span>
+</span><a name="line-303"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Control.Applicative</span><span>
+</span><a name="line-304"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Control.Arrow</span><span>
+</span><a name="line-305"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Control.Category</span><span>
+</span><a name="line-306"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Control.DeepSeq</span><span>
+</span><a name="line-307"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Control.Exception.Base</span><span>
+</span><a name="line-308"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Control.Monad</span><span>
+</span><a name="line-309"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Control.Monad.Catch</span><span>
+</span><a name="line-310"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Control.Monad.Fail</span><span>
+</span><a name="line-311"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Control.Monad.Reader</span><span>
+</span><a name="line-312"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Control.Monad.ST</span><span>
+</span><a name="line-313"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Bool</span><span>
+</span><a name="line-314"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.ByteString.Short</span><span>
+</span><a name="line-315"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Char</span><span>
+</span><a name="line-316"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Data</span><span>
+</span><a name="line-317"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Either</span><span>
+</span><a name="line-318"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Eq</span><span>
+</span><a name="line-319"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Foldable</span><span>
+</span><a name="line-320"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Function</span><span>
+</span><a name="line-321"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Functor</span><span>
+</span><a name="line-322"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Functor.Const</span><span>
+</span><a name="line-323"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Functor.Identity</span><span>
+</span><a name="line-324"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Hashable</span><span>
+</span><a name="line-325"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.HashMap.Strict</span><span>
+</span><a name="line-326"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.HashSet</span><span>
+</span><a name="line-327"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Int</span><span>
+</span><a name="line-328"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.IntMap.Strict</span><span>
+</span><a name="line-329"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.IntSet</span><span>
+</span><a name="line-330"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.List</span><span>
+</span><a name="line-331"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.List.NonEmpty</span><span>
+</span><a name="line-332"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Map.Strict</span><span>
+</span><a name="line-333"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Maybe</span><span>
+</span><a name="line-334"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Ord</span><span>
+</span><a name="line-335"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Proxy</span><span>
+</span><a name="line-336"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Ratio</span><span>
+</span><a name="line-337"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Sequence</span><span>
+</span><a name="line-338"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Set</span><span>
+</span><a name="line-339"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Text.Encoding.Error</span><span>
+</span><a name="line-340"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Traversable</span><span>
+</span><a name="line-341"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Vector</span><span>
+</span><a name="line-342"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Void</span><span>
+</span><a name="line-343"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.Word</span><span>
+</span><a name="line-344"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Foreign.Storable</span><span>
+</span><a name="line-345"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">GHC.Generics</span><span>
+</span><a name="line-346"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">GHC.Stack</span><span>
+</span><a name="line-347"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Numeric.Natural</span><span>
+</span><a name="line-348"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Prelude</span><span>
+</span><a name="line-349"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">System.Exit</span><span>
+</span><a name="line-350"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Text.Read</span><span>
+</span><a name="line-351"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Text.Show</span><span>
+</span><a name="line-352"></a><span>
+</span><a name="line-353"></a><span class="hs-comment">-- Bring instances for some of the unliftio types in scope, so they can be documented here.</span><span>
+</span><a name="line-354"></a><span class="hs-keyword">import</span><span> </span><span class="hs-identifier">UnliftIO</span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><a name="line-355"></a></pre></body></html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-comment">-- | @List@ partial functions. Import as:</span><span>
+</span><a name="line-2"></a><span class="hs-comment">--</span><span>
+</span><a name="line-3"></a><span class="hs-comment">-- &gt; import qualified RIO.List.Partial as L'</span><span>
+</span><a name="line-4"></a><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">RIO.List.Partial</span><span>
+</span><a name="line-5"></a><span>  </span><span class="hs-special">(</span><span>
+</span><a name="line-6"></a><span>  </span><span class="hs-comment">-- * Basic functions</span><span>
+</span><a name="line-7"></a><span>    </span><span class="hs-identifier hs-var">Data.List.head</span><span>
+</span><a name="line-8"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.last</span><span>
+</span><a name="line-9"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.tail</span><span>
+</span><a name="line-10"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.init</span><span>
+</span><a name="line-11"></a><span>
+</span><a name="line-12"></a><span>  </span><span class="hs-comment">-- * Reducing lists (folds)</span><span>
+</span><a name="line-13"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.foldl1</span><span>
+</span><a name="line-14"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.foldl1'</span><span>
+</span><a name="line-15"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.foldr1</span><span>
+</span><a name="line-16"></a><span>
+</span><a name="line-17"></a><span>  </span><span class="hs-comment">-- ** Special folds</span><span>
+</span><a name="line-18"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.maximum</span><span>
+</span><a name="line-19"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.minimum</span><span>
+</span><a name="line-20"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.maximumBy</span><span>
+</span><a name="line-21"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.minimumBy</span><span>
+</span><a name="line-22"></a><span>
+</span><a name="line-23"></a><span>  </span><span class="hs-comment">-- * Building lists</span><span>
+</span><a name="line-24"></a><span>
+</span><a name="line-25"></a><span>  </span><span class="hs-comment">-- ** Scans</span><span>
+</span><a name="line-26"></a><span>  </span><span class="hs-comment">--</span><span>
+</span><a name="line-27"></a><span>  </span><span class="hs-comment">-- These functions are not partial, they are being exported here for legacy</span><span>
+</span><a name="line-28"></a><span>  </span><span class="hs-comment">-- reasons, they may be removed from this module on a future major release</span><span>
+</span><a name="line-29"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.scanl1</span><span>
+</span><a name="line-30"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.scanr1</span><span>
+</span><a name="line-31"></a><span>
+</span><a name="line-32"></a><span>  </span><span class="hs-comment">-- * Indexing lists</span><span>
+</span><a name="line-33"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="hs-operator hs-var">Data.List.!!</span><span class="hs-special">)</span><span>
+</span><a name="line-34"></a><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><a name="line-35"></a><span>
+</span><a name="line-36"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.List</span><span>
+</span><a name="line-37"></a></pre></body></html>

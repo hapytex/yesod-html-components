@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-comment">-- | @NonEmpty@ list. Import as:</span><span>
+</span><a name="line-2"></a><span class="hs-comment">--</span><span>
+</span><a name="line-3"></a><span class="hs-comment">-- &gt; import qualified RIO.NonEmpty as NE</span><span>
+</span><a name="line-4"></a><span class="hs-comment">--</span><span>
+</span><a name="line-5"></a><span class="hs-comment">-- This module does not export any partial functions.  For those, see</span><span>
+</span><a name="line-6"></a><span class="hs-comment">-- &quot;RIO.NonEmpty.Partial&quot;</span><span>
+</span><a name="line-7"></a><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">RIO.NonEmpty</span><span>
+</span><a name="line-8"></a><span>  </span><span class="hs-special">(</span><span>
+</span><a name="line-9"></a><span>  </span><span class="hs-comment">-- * The type of non-empty streams</span><span>
+</span><a name="line-10"></a><span>    </span><span class="hs-identifier hs-type">Data.List.NonEmpty.NonEmpty</span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><a name="line-11"></a><span>
+</span><a name="line-12"></a><span>  </span><span class="hs-comment">-- * Non-empty stream transformations</span><span>
+</span><a name="line-13"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.map</span><span>
+</span><a name="line-14"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.intersperse</span><span>
+</span><a name="line-15"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.scanl</span><span>
+</span><a name="line-16"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.scanr</span><span>
+</span><a name="line-17"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.scanl1</span><span>
+</span><a name="line-18"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.scanr1</span><span>
+</span><a name="line-19"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.transpose</span><span>
+</span><a name="line-20"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.sortBy</span><span>
+</span><a name="line-21"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.sortWith</span><span>
+</span><a name="line-22"></a><span>
+</span><a name="line-23"></a><span>  </span><span class="hs-comment">-- * Basic functions</span><span>
+</span><a name="line-24"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.length</span><span>
+</span><a name="line-25"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.head</span><span>
+</span><a name="line-26"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.tail</span><span>
+</span><a name="line-27"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.last</span><span>
+</span><a name="line-28"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.init</span><span>
+</span><a name="line-29"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="hs-operator hs-var">Data.List.NonEmpty.&lt;|</span><span class="hs-special">)</span><span>
+</span><a name="line-30"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.cons</span><span>
+</span><a name="line-31"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.uncons</span><span>
+</span><a name="line-32"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.unfoldr</span><span>
+</span><a name="line-33"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.sort</span><span>
+</span><a name="line-34"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.reverse</span><span>
+</span><a name="line-35"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.inits</span><span>
+</span><a name="line-36"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.tails</span><span>
+</span><a name="line-37"></a><span>
+</span><a name="line-38"></a><span>  </span><span class="hs-comment">-- * Building streams</span><span>
+</span><a name="line-39"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.iterate</span><span>
+</span><a name="line-40"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.repeat</span><span>
+</span><a name="line-41"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.cycle</span><span>
+</span><a name="line-42"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.insert</span><span>
+</span><a name="line-43"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.some1</span><span>
+</span><a name="line-44"></a><span>
+</span><a name="line-45"></a><span>  </span><span class="hs-comment">-- * Extracting sublists</span><span>
+</span><a name="line-46"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.take</span><span>
+</span><a name="line-47"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.drop</span><span>
+</span><a name="line-48"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.splitAt</span><span>
+</span><a name="line-49"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.takeWhile</span><span>
+</span><a name="line-50"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.dropWhile</span><span>
+</span><a name="line-51"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.span</span><span>
+</span><a name="line-52"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.break</span><span>
+</span><a name="line-53"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.filter</span><span>
+</span><a name="line-54"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.partition</span><span>
+</span><a name="line-55"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.group</span><span>
+</span><a name="line-56"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.groupBy</span><span>
+</span><a name="line-57"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.groupWith</span><span>
+</span><a name="line-58"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.groupAllWith</span><span>
+</span><a name="line-59"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.group1</span><span>
+</span><a name="line-60"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.groupBy1</span><span>
+</span><a name="line-61"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.groupWith1</span><span>
+</span><a name="line-62"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.groupAllWith1</span><span>
+</span><a name="line-63"></a><span>
+</span><a name="line-64"></a><span>  </span><span class="hs-comment">-- * Sublist predicates</span><span>
+</span><a name="line-65"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.isPrefixOf</span><span>
+</span><a name="line-66"></a><span>
+</span><a name="line-67"></a><span>  </span><span class="hs-comment">-- * Set-like operations</span><span>
+</span><a name="line-68"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.nub</span><span>
+</span><a name="line-69"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.nubBy</span><span>
+</span><a name="line-70"></a><span>
+</span><a name="line-71"></a><span>  </span><span class="hs-comment">-- * Zipping and unzipping streams</span><span>
+</span><a name="line-72"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.zip</span><span>
+</span><a name="line-73"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.zipWith</span><span>
+</span><a name="line-74"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.unzip</span><span>
+</span><a name="line-75"></a><span>
+</span><a name="line-76"></a><span>  </span><span class="hs-comment">-- * Converting to and from a list</span><span>
+</span><a name="line-77"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.nonEmpty</span><span>
+</span><a name="line-78"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.toList</span><span>
+</span><a name="line-79"></a><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier hs-var">Data.List.NonEmpty.xor</span><span>
+</span><a name="line-80"></a><span>
+</span><a name="line-81"></a><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><a name="line-82"></a><span>
+</span><a name="line-83"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="hs-identifier">Data.List.NonEmpty</span><span>
+</span><a name="line-84"></a></pre></body></html>
