@@ -23,6 +23,8 @@ resolver: lts-14.8
 # Various formats can be used as shown in the example below.
 #
 # packages:
+#   - location:
+#     git: git@github.com:hapytex/css-selectors.git
 # - some-directory
 # - https://example.com/foo/bar/baz-0.0.2.tar.gz
 # - location:
@@ -37,7 +39,9 @@ packages:
 # Dependency packages to be pulled from upstream that are not in the resolver
 # using the same syntax as the packages field.
 # (e.g., acme-missiles-0.3)
-# extra-deps: []
+extra-deps:
+  - github: hapytex/css-selectors
+    commit: master
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

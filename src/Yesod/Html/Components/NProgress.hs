@@ -2,10 +2,14 @@
 
 module Yesod.Html.Components.NProgress where
 
+import Css.Selector(SelectorGroup, csssel)
+
 import Data.Aeson(ToJSON(toJSON), object, (.=))
 import Data.Default(Default(def))
 import Data.Text(Text)
+
 import Text.Julius(JavascriptUrl, ToJavascript(toJavascript))
+
 import Yesod.Core(MonadWidget, hamlet, julius)
 import Yesod.Core.Widget(addStylesheetRemote, toWidgetBody, toWidgetHead)
 
@@ -27,21 +31,22 @@ startDoneProgress = [julius|NProgress.start();NProgress.done();|]
 configureProgress :: NProgressConfig -> JavascriptUrl url
 configureProgress npc = [julius|NProgress.configure(#{npc});|]
 
-data NProgressConfig = NProgressConfig { minimum :: Float, trickle :: Bool, trickleSpeed :: Int, showSpinner :: Bool }
+data NProgressConfig = NProgressConfig { minimum :: Float, trickle :: Bool, trickleSpeed :: Int, showSpinner :: Bool, parent :: SelectorGroup }
 
 instance ToJSON NProgressConfig where
-    toJSON (NProgressConfig mn t ts ss) = object [
+    toJSON (NProgressConfig mn t ts ss p) = object [
         "minimum" .= mn,
         "trickle" .= t,
         "trickleSpeed" .= ts,
-        "showSpinner" .= ss
+        "showSpinner" .= ss,
+        "parent" .= p
       ]
 
 instance ToJavascript NProgressConfig where
     toJavascript = toJavascript . toJSON
 
 instance Default NProgressConfig where
-    def = NProgressConfig 0.08 True 200 True
+    def = NProgressConfig 0.08 True 200 True [csssel|body|]
 
 nProgressWidget :: MonadWidget m => m ()
 nProgressWidget = cssFileInclude >> jsFileInclude >> toWidgetBody startDoneProgress
