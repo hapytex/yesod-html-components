@@ -1,8 +1,9 @@
-{-# LANGUAGE OverloadedStrings, QuasiQuotes #-}
+{-# LANGUAGE OverloadedStrings, PatternSynonyms, QuasiQuotes #-}
 
 module Yesod.Html.Components.NProgress where
 
 import Css.Selector(SelectorGroup, csssel)
+import Css.Easing(Easing, pattern Ease)
 
 import Data.Aeson(ToJSON(toJSON), object, (.=))
 import Data.Default(Default(def))
@@ -31,11 +32,12 @@ startDoneProgress = [julius|NProgress.start();NProgress.done();|]
 configureProgress :: NProgressConfig -> JavascriptUrl url
 configureProgress npc = [julius|NProgress.configure(#{npc});|]
 
-data NProgressConfig = NProgressConfig { minimum :: Float, speed :: Int, trickle :: Bool, trickleSpeed :: Int, showSpinner :: Bool, parent :: SelectorGroup }
+data NProgressConfig = NProgressConfig { minimum :: Float, easing :: Easing, speed :: Int, trickle :: Bool, trickleSpeed :: Int, showSpinner :: Bool, parent :: SelectorGroup }
 
 instance ToJSON NProgressConfig where
-    toJSON (NProgressConfig mn s t ts ss p) = object [
+    toJSON (NProgressConfig mn e s t ts ss p) = object [
         "minimum" .= mn,
+        "easing" .= e,
         "speed" .= s,
         "trickle" .= t,
         "trickleSpeed" .= ts,
@@ -47,7 +49,7 @@ instance ToJavascript NProgressConfig where
     toJavascript = toJavascript . toJSON
 
 instance Default NProgressConfig where
-    def = NProgressConfig 0.08 200 True 200 True [csssel|body|]
+    def = NProgressConfig 0.08 Ease 200 True 200 True [csssel|body|]
 
 nProgressWidget :: MonadWidget m => m ()
 nProgressWidget = cssFileInclude >> jsFileInclude >> toWidgetBody startDoneProgress
