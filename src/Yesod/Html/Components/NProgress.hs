@@ -31,11 +31,12 @@ startDoneProgress = [julius|NProgress.start();NProgress.done();|]
 configureProgress :: NProgressConfig -> JavascriptUrl url
 configureProgress npc = [julius|NProgress.configure(#{npc});|]
 
-data NProgressConfig = NProgressConfig { minimum :: Float, trickle :: Bool, trickleSpeed :: Int, showSpinner :: Bool, parent :: SelectorGroup }
+data NProgressConfig = NProgressConfig { minimum :: Float, speed :: Int, trickle :: Bool, trickleSpeed :: Int, showSpinner :: Bool, parent :: SelectorGroup }
 
 instance ToJSON NProgressConfig where
-    toJSON (NProgressConfig mn t ts ss p) = object [
+    toJSON (NProgressConfig mn s t ts ss p) = object [
         "minimum" .= mn,
+        "speed" .= s,
         "trickle" .= t,
         "trickleSpeed" .= ts,
         "showSpinner" .= ss,
@@ -46,7 +47,7 @@ instance ToJavascript NProgressConfig where
     toJavascript = toJavascript . toJSON
 
 instance Default NProgressConfig where
-    def = NProgressConfig 0.08 True 200 True [csssel|body|]
+    def = NProgressConfig 0.08 200 True 200 True [csssel|body|]
 
 nProgressWidget :: MonadWidget m => m ()
 nProgressWidget = cssFileInclude >> jsFileInclude >> toWidgetBody startDoneProgress
