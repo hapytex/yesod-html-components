@@ -13,8 +13,9 @@ jsFileInclude :: MonadWidget m => m ()
 startDoneProgress :: JavascriptUrl url
 configureProgress :: NProgressConfig -> JavascriptUrl url
 data NProgressConfig
-NProgressConfig :: Float -> Int -> Bool -> Int -> Bool -> SelectorGroup -> NProgressConfig
+NProgressConfig :: Float -> Easing -> Int -> Bool -> Int -> Bool -> SelectorGroup -> NProgressConfig
 [minimum] :: NProgressConfig -> Float
+[easing] :: NProgressConfig -> Easing
 [speed] :: NProgressConfig -> Int
 [trickle] :: NProgressConfig -> Bool
 [trickleSpeed] :: NProgressConfig -> Int
